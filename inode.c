@@ -3791,7 +3791,7 @@ s64 ntfs_inode_attr_pread(struct inode *vi, s64 pos, s64 count, u8 *buf)
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
 	do {
 		/* Update @index and get the next folio. */
-		folio = read_mapping_folio(mapping, index, NULL);
+		folio = ntfs_read_metadata_folio(mapping, index);
 		if (IS_ERR(folio))
 			break;
 
@@ -3997,7 +3997,7 @@ static s64 __ntfs_inode_non_resident_attr_pwrite(struct inode *vi,
 				break;
 			}
 		} else {
-			folio = read_mapping_folio(mapping, index, NULL);
+			folio = ntfs_read_metadata_folio(mapping, index);
 			if (IS_ERR(folio)) {
 				ret = PTR_ERR(folio);
 				ntfs_error(vi->i_sb, "Failed to read a page %lu for attr %#x: %ld",

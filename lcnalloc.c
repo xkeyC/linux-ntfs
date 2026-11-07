@@ -359,7 +359,7 @@ struct runlist_element *ntfs_cluster_alloc(struct ntfs_volume *vol, const s64 st
 			goto next_bmp_pos;
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
-		folio = read_mapping_folio(mapping, index, NULL);
+		folio = ntfs_read_metadata_folio(mapping, index);
 		if (IS_ERR(folio)) {
 			err = PTR_ERR(folio);
 			ntfs_error(vol->sb, "Failed to map page.");

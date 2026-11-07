@@ -183,9 +183,9 @@ int ntfs_bdev_write(struct super_block *sb, void *buf, loff_t start, size_t size
 		u32 len;
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 11, 0)
-		folio = read_mapping_folio(sb->s_bdev->bd_mapping, idx, NULL);
+		folio = ntfs_read_metadata_folio(sb->s_bdev->bd_mapping, idx);
 #else
-		folio = read_mapping_folio(sb->s_bdev->bd_inode->i_mapping, idx, NULL);
+		folio = ntfs_read_metadata_folio(sb->s_bdev->bd_inode->i_mapping, idx);
 #endif
 		if (IS_ERR(folio)) {
 			ntfs_error(sb, "Unable to read %ld page", idx);

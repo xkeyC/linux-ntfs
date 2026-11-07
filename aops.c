@@ -7,6 +7,7 @@
  * Copyright (c) 2025 LG Electronics Co., Ltd.
  */
 
+#include <linux/swap.h>
 #include <linux/writeback.h>
 
 #include "attrib.h"
@@ -560,6 +561,65 @@ static int ntfs_swap_activate(struct swap_info_struct *sis,
 	return iomap_swapfile_activate(sis, swap_file, span,
 			&ntfs_read_iomap_ops);
 }
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
+/**
+ * ntfs_read_metadata_folio - read a metadata folio, ignoring fatal signals
+ * @mapping:	address space of the metadata inode or block device
+ * @index:	page cache index to read
+ *
+ * Like read_mapping_folio(), but the wait for the read cannot be interrupted,
+ * so a fatal signal cannot fail a metadata read in the middle of an update.
+ * The caller must not hold the lock of the folio at @index.
+ *
+ * Return: the uptodate folio with a reference held, or an ERR_PTR().
+ */
+struct folio *ntfs_read_metadata_folio(struct address_space *mapping,
+				       pgoff_t index)
+{
+	struct folio *folio;
+	bool read_failed = false;
+	int err;
+
+	folio = filemap_get_folio(mapping, index);
+	if (!IS_ERR(folio)) {
+		if (folio_test_uptodate(folio))
+			goto out;
+		folio_put(folio);
+	}
+repeat:
+	folio = __filemap_get_folio(mapping, index, FGP_LOCK | FGP_CREAT,
+				    mapping_gfp_mask(mapping));
+	if (IS_ERR(folio))
+		return folio;
+	/* $MFT updates clear uptodate under the folio lock, so check it locked. */
+	if (folio_test_uptodate(folio)) {
+		folio_unlock(folio);
+		goto out;
+	}
+	if (read_failed) {
+		folio_unlock(folio);
+		folio_put(folio);
+		return ERR_PTR(-EIO);
+	}
+
+	/* ->read_folio() unlocks the folio when the read completes. */
+	err = mapping->a_ops->read_folio(NULL, folio);
+	if (err) {
+		folio_put(folio);
+		if (err == AOP_TRUNCATED_PAGE)
+			goto repeat;
+		return ERR_PTR(err);
+	}
+	folio_wait_locked(folio);
+	read_failed = !folio_test_uptodate(folio);
+	folio_put(folio);
+	goto repeat;
+out:
+	folio_mark_accessed(folio);
+	return folio;
+}
+#endif
 
 const struct address_space_operations ntfs_aops = {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 0)

@@ -159,7 +159,7 @@ int __ntfs_bitmap_set_bits_in_run(struct inode *vi, const s64 start_bit,
 	/* Get the page containing the first bit (@start_bit). */
 	mapping = vi->i_mapping;
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
-	folio = read_mapping_folio(mapping, index, NULL);
+	folio = ntfs_read_metadata_folio(mapping, index);
 	if (IS_ERR(folio)) {
 		if (!is_rollback)
 			ntfs_error(vi->i_sb,
@@ -237,7 +237,7 @@ int __ntfs_bitmap_set_bits_in_run(struct inode *vi, const s64 start_bit,
 		folio_unlock(folio);
 		kunmap_local(kaddr);
 		folio_put(folio);
-		folio = read_mapping_folio(mapping, ++index, NULL);
+		folio = ntfs_read_metadata_folio(mapping, ++index);
 		if (IS_ERR(folio)) {
 			ntfs_error(vi->i_sb,
 				   "Failed to map subsequent page (error %li), aborting.",

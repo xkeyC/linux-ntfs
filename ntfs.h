@@ -297,6 +297,18 @@ static inline int ntfs_ffs(int x)
 	return r;
 }
 
+/* From fs/ntfs/aops.c */
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
+struct folio *ntfs_read_metadata_folio(struct address_space *mapping,
+				       pgoff_t index);
+#else
+static inline struct folio *ntfs_read_metadata_folio(struct address_space *mapping,
+						     pgoff_t index)
+{
+	return read_mapping_folio(mapping, index, NULL);
+}
+#endif
+
 /* From fs/ntfs/bdev-io.c */
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 16, 0)
 int ntfs_bdev_read(struct block_device *bdev, char *data, loff_t start, size_t size);
