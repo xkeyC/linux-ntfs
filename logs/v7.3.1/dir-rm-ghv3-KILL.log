@@ -1,0 +1,26 @@
+=== trial 1: dir has 4000
+=== trial 2: dir has 3999
+=== trial 3: dir has 3996
+=== trial 4: dir has 3993
+=== trial 5: dir has 3989
+=== trial 6: dir has 3984
+=== trial 7: dir has 3979
+=== trial 8: dir has 3974
+=== trial 9: dir has 3967
+=== trial 10: dir has 3960
+=== trial 11: dir has 3953
+=== trial 12: dir has 3944
+=== trial 13: dir has 3935
+=== trial 14: dir has 3925
+=== trial 15: dir has 3914
+=== trial 16: dir has 3903
+=== trial 17: dir has 3901
+=== trial 18: dir has 3899
+=== trial 19: dir has 3896
+=== trial 20: dir has 3892
+=== RESULT module=ghv3 scen=dir-rm signal=KILL ro_after_trial=none
+      1 Unknown kernel command line parameters "ntfsmod=ghv3 scen=dir-rm sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=ghv3 scen=dir-rm sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=ghv3 scen=dir-rm sig=KILL n=20
+      1     ntfsmod=ghv3
+=== umount ok

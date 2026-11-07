@@ -1,0 +1,117 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-2.0
+# /init of the test initramfs: kill a task in the middle of ntfs metadata work and check
+# whether the volume turns read-only.  See README.md.
+# Kernel command line: ntfsmod=<name> scen=<scenario> sig=<KILL|TERM> n=<runs>
+#   ntfsmod=NAME loads /lib/ntfs-NAME.ko; scen=prep-<set> fills a template image and exits.
+export PATH=/bin:/sbin
+mount -t proc proc /proc; mount -t sysfs sys /sys; mount -t devtmpfs dev /dev 2>/dev/null
+mount -t debugfs debugfs /sys/kernel/debug
+MOD=base; SCEN=spread; SIG=KILL; N=20
+for a in $(cat /proc/cmdline); do case $a in ntfsmod=*) MOD=${a#*=};; scen=*) SCEN=${a#*=};; sig=*) SIG=${a#*=};; n=*) N=${a#*=};; esac; done
+# Kernels with virtio as modules: mkinitramfs.sh --extra puts them in /lib/extra with a load order.
+if [ -f /lib/extra/order ]; then for m in $(cat /lib/extra/order); do insmod /lib/extra/$m.ko 2>/dev/null; done; sleep 1; fi
+insmod /lib/ntfs-$MOD.ko || { echo "=== INSMOD FAILED"; poweroff -f; }
+echo 0 > /proc/sys/kernel/printk_ratelimit
+
+DEV=/dev/vda
+if [ "$SCEN" = eio ]; then
+  # Delay every read by 150 ms in dm-delay so the bio reaches vda (and fails) only after the
+  # reader's killable wait has already given up.
+  SECT=$(cat /sys/block/vda/size)
+  DM_DISABLE_UDEV=1 dmsetup create --noudevsync dly --table "0 $SECT delay /dev/vda 0 150 /dev/vda 0 0" || { echo "=== DMSETUP FAILED"; poweroff -f; }
+  DEV=/dev/mapper/dly
+  [ -e $DEV ] || DEV=/dev/dm-0
+fi
+mount -t ntfs -o errors=remount-ro $DEV /mnt || { echo "=== MOUNT FAILED"; poweroff -f; }
+
+longname() { printf 'f%05d_%s' "$1" "abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789"; }
+
+case $SCEN in
+prep-spread)   # 20 trials x 12 small files, each after a 128 MiB filler (one $Bitmap page = 128 MiB)
+  for i in $(seq 1 240); do fallocate -l 128M /mnt/fill$i; dd if=/dev/urandom of=/mnt/s$i bs=64k count=1 2>/dev/null; sync; done ;;
+prep-bigfile)  # files whose single run spans 4 $Bitmap pages
+  for i in $(seq 1 30); do fallocate -l 512M /mnt/b$i; dd if=/dev/urandom of=/mnt/b$i bs=64k count=1 conv=notrunc 2>/dev/null; sync; done ;;
+prep-dir)      # one big directory with long names, so its index has hundreds of blocks
+  mkdir /mnt/d
+  for i in $(seq 1 4000); do : > /mnt/d/$(longname $i); done; sync ;;
+esac
+case $SCEN in prep-*) echo "=== PREP DONE $(ls /mnt | wc -l) entries"; umount /mnt && echo "=== umount ok"; sync; poweroff -f;; esac
+
+delay_us() { echo $(( $1 + ($2 * 37000) % $3 )); }
+alive() { [ -d /proc/$1 ] && ! grep -q '^State:.*Z' /proc/$1/status 2>/dev/null; }
+# kill $pid, then make sure it really exits (an uninterruptible wait that never ends would show up here)
+kill_and_check() {
+  kill -$SIG $1 2>/dev/null
+  w=0; while alive $1 && [ $w -lt 300 ]; do usleep 100000; w=$((w+1)); done
+  if alive $1; then echo "=== HANG: pid $1 still alive 30s after SIG$SIG"; cat /proc/$1/stack 2>/dev/null; fi
+  wait $1 2>/dev/null
+}
+fresh() { sync; echo 3 > /proc/sys/vm/drop_caches; }
+is_ro() { grep -q ' /mnt ntfs ro' /proc/mounts; }
+
+ro_at=none
+echo "=== start module=$MOD scen=$SCEN signal=$SIG trials=$N"
+for t in $(seq 1 $N); do
+  case $SCEN in
+  spread|eio)
+    list=""; for i in $(seq $(( (t-1)*12+1 )) $(( t*12 ))); do list="$list /mnt/s$i"; done
+    fresh; stat $list > /dev/null
+    rm $list & pid=$!
+    if [ $SCEN = eio ]; then
+      usleep 400000
+      echo 100 > /sys/kernel/debug/fail_make_request/probability
+      echo -1 > /sys/kernel/debug/fail_make_request/times
+      echo 0 > /sys/kernel/debug/fail_make_request/verbose
+      echo 1 > /sys/block/vda/make-it-fail
+      kill_and_check $pid
+      usleep 500000
+      echo 0 > /sys/block/vda/make-it-fail
+    else
+      usleep $(delay_us 30000 $t 220000); kill_and_check $pid
+    fi
+    left=0; for f in $list; do [ -e $f ] && left=$((left+1)); done
+    echo "=== trial $t: 12 -> $left" ;;
+  bigfile)
+    fresh; stat /mnt/b$t > /dev/null
+    rm /mnt/b$t & pid=$!
+    usleep $(delay_us 20000 $t 90000); kill_and_check $pid
+    echo "=== trial $t: b$t $([ -e /mnt/b$t ] && echo kept || echo removed)" ;;
+  dir-rm)
+    list=""; for i in $(seq $t 100 4000); do list="$list /mnt/d/$(longname $i)"; done
+    fresh
+    rm $list 2>/dev/null & pid=$!
+    usleep $(delay_us 50000 $t 600000); kill_and_check $pid
+    echo "=== trial $t: dir has $(ls /mnt/d | wc -l)" ;;
+  dir-create)
+    fresh
+    # each new name sorts right after an existing f%05d_abc... entry, so inserts land in leaves all over the index
+    sh -c "for i in \$(seq $t 97 4000); do : > /mnt/d/f\$(printf '%05d' \$i)_b$t; done" & pid=$!
+    usleep $(delay_us 50000 $t 600000); kill_and_check $pid
+    echo "=== trial $t: dir has $(ls /mnt/d | wc -l)" ;;
+  lookup)     # issue #98: readdir plus a lookup per entry, killed partway through
+    fresh
+    ls -l /mnt/d > /dev/null & pid=$!
+    usleep $(delay_us 50000 $t 600000); kill_and_check $pid
+    echo "=== trial $t: lookup interrupted" ;;
+  falloc)
+    fresh
+    fallocate -l 6G /mnt/a$t & pid=$!
+    usleep $(delay_us 20000 $t 300000); kill_and_check $pid
+    is_ro || rm -f /mnt/a$t
+    echo "=== trial $t: fallocate interrupted" ;;
+  write)
+    fresh
+    dd if=/dev/zero of=/mnt/w$t bs=1M count=400 conv=fsync 2>/dev/null & pid=$!
+    usleep $(delay_us 200000 $t 600000); kill_and_check $pid
+    is_ro || rm -f /mnt/w$t
+    echo "=== trial $t: write interrupted" ;;
+  esac
+  if is_ro; then ro_at=$t; break; fi
+done
+echo "=== RESULT module=$MOD scen=$SCEN signal=$SIG ro_after_trial=$ro_at"
+dmesg | grep -E 'ntfs|BUG|WARNING|INFO: task|circular|KASAN|Call Trace|FAULT_INJECTION' | grep -vE 'volume version|out-of-tree|taints' | sed 's/^\[ *[0-9.]*\] //' | sort | uniq -c | sort -rn | head -20
+echo 0 > /sys/block/vda/make-it-fail 2>/dev/null
+umount /mnt && echo "=== umount ok"
+sync
+poweroff -f

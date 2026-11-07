@@ -1,0 +1,26 @@
+=== trial 1: 12 -> 0
+=== trial 2: 12 -> 8
+=== trial 3: 12 -> 7
+=== trial 4: 12 -> 6
+=== trial 5: 12 -> 4
+=== trial 6: 12 -> 11
+=== trial 7: 12 -> 10
+=== trial 8: 12 -> 8
+=== trial 9: 12 -> 7
+=== trial 10: 12 -> 5
+=== trial 11: 12 -> 4
+=== trial 12: 12 -> 11
+=== trial 13: 12 -> 10
+=== trial 14: 12 -> 8
+=== trial 15: 12 -> 7
+=== trial 16: 12 -> 5
+=== trial 17: 12 -> 4
+=== trial 18: 12 -> 11
+=== trial 19: 12 -> 10
+=== trial 20: 12 -> 8
+=== RESULT module=n731v3 scen=spread signal=KILL ro_after_trial=none
+      1 Unknown kernel command line parameters "ntfsmod=n731v3 scen=spread sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731v3 scen=spread sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731v3 scen=spread sig=KILL n=20
+      1     ntfsmod=n731v3
+=== umount ok

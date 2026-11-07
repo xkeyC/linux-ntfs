@@ -1,0 +1,26 @@
+=== trial 1: write interrupted
+=== trial 2: write interrupted
+=== trial 3: write interrupted
+=== trial 4: write interrupted
+=== trial 5: write interrupted
+=== trial 6: write interrupted
+=== trial 7: write interrupted
+=== trial 8: write interrupted
+=== trial 9: write interrupted
+=== trial 10: write interrupted
+=== trial 11: write interrupted
+=== trial 12: write interrupted
+=== trial 13: write interrupted
+=== trial 14: write interrupted
+=== trial 15: write interrupted
+=== trial 16: write interrupted
+=== trial 17: write interrupted
+=== trial 18: write interrupted
+=== trial 19: write interrupted
+=== trial 20: write interrupted
+=== RESULT module=n731v3 scen=write signal=KILL ro_after_trial=none
+      1 Unknown kernel command line parameters "ntfsmod=n731v3 scen=write sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731v3 scen=write sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731v3 scen=write sig=KILL n=20
+      1     ntfsmod=n731v3
+=== umount ok

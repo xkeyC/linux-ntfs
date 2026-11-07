@@ -1,0 +1,14 @@
+=== trial 1: b1 removed
+=== trial 2: b2 removed
+=== RESULT module=base scen=bigfile signal=KILL ro_after_trial=2
+      2 ntfs: (device vda): __ntfs_bitmap_set_bits_in_run(): Failed to map subsequent page (error -4), aborting.
+      1 ntfs: (device vda): ntfs_non_resident_dealloc_clusters(): Failed to free attribute clusters. Leaving inconsistent metadata.
+      1 ntfs: (device vda): ntfs_mft_record_free(): Eeek! Rollback failed in ntfs_mft_record_free. Leaving inconsistent metadata!
+      1 ntfs: (device vda): ntfs_delete_base_inode(): Failed to free base MFT record. Leaving inconsistent metadata.
+      1 ntfs: (device vda): __ntfs_bitmap_set_bits_in_run(): Failed to map first page (error -4), aborting.
+      1 ntfs: (device vda): Filesystem has been set read-only
+      1 Unknown kernel command line parameters "ntfsmod=base scen=bigfile sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=bigfile sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=bigfile sig=KILL n=20
+      1     ntfsmod=base
+=== umount ok

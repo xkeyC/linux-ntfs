@@ -1,0 +1,17 @@
+=== trial 1: write interrupted
+=== trial 2: write interrupted
+=== trial 3: write interrupted
+=== trial 4: write interrupted
+=== trial 5: write interrupted
+=== trial 6: write interrupted
+=== trial 7: write interrupted
+=== trial 8: write interrupted
+=== RESULT module=base scen=write signal=KILL ro_after_trial=8
+      1 ntfs: (device vda): ntfs_cluster_alloc(): Failed to map page.
+      1 ntfs: (device vda): ntfs_cluster_alloc(): Failed to allocate clusters, aborting (error -4).
+      1 ntfs: (device vda): Filesystem has been set read-only
+      1 Unknown kernel command line parameters "ntfsmod=base scen=write sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=write sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=write sig=KILL n=20
+      1     ntfsmod=base
+=== umount ok

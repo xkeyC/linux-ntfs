@@ -1,0 +1,11 @@
+=== trial 1: 12 -> 0
+=== trial 2: 12 -> 8
+=== RESULT module=base scen=spread signal=KILL ro_after_trial=2
+      1 ntfs: (device vda): ntfs_non_resident_dealloc_clusters(): Failed to free attribute clusters. Leaving inconsistent metadata.
+      1 ntfs: (device vda): __ntfs_bitmap_set_bits_in_run(): Failed to map first page (error -4), aborting.
+      1 ntfs: (device vda): Filesystem has been set read-only
+      1 Unknown kernel command line parameters "ntfsmod=base scen=spread sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=spread sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=spread sig=KILL n=20
+      1     ntfsmod=base
+=== umount ok

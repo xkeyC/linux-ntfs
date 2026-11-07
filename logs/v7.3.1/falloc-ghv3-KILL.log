@@ -1,0 +1,26 @@
+=== trial 1: fallocate interrupted
+=== trial 2: fallocate interrupted
+=== trial 3: fallocate interrupted
+=== trial 4: fallocate interrupted
+=== trial 5: fallocate interrupted
+=== trial 6: fallocate interrupted
+=== trial 7: fallocate interrupted
+=== trial 8: fallocate interrupted
+=== trial 9: fallocate interrupted
+=== trial 10: fallocate interrupted
+=== trial 11: fallocate interrupted
+=== trial 12: fallocate interrupted
+=== trial 13: fallocate interrupted
+=== trial 14: fallocate interrupted
+=== trial 15: fallocate interrupted
+=== trial 16: fallocate interrupted
+=== trial 17: fallocate interrupted
+=== trial 18: fallocate interrupted
+=== trial 19: fallocate interrupted
+=== trial 20: fallocate interrupted
+=== RESULT module=ghv3 scen=falloc signal=KILL ro_after_trial=none
+      1 Unknown kernel command line parameters "ntfsmod=ghv3 scen=falloc sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=ghv3 scen=falloc sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=ghv3 scen=falloc sig=KILL n=20
+      1     ntfsmod=ghv3
+=== umount ok

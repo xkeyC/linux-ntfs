@@ -1,0 +1,10 @@
+Parse #1: Scan mft entries in volume...
+Parse #2: Check system files...
+  5.88 percent completed 11.76 percent completed 17.65 percent completed 23.53 percent completed 29.41 percent completed 35.29 percent completed 41.18 percent completed 47.06 percent completed 52.94 percent completed 58.82 percent completed 64.71 percent completed 70.59 percent completed 76.47 percent completed 82.35 percent completed 88.24 percent completed100.00 percent completed
+100.00 percent completedParse #3: Replay logfile...
+Parse #4: Check index entries in volume...
+ 24.02 percent completed 48.04 percent completed 72.06 percent completed 96.08 percent completed100.00 percent completed
+Parse #5: Scan orphaned MFTs candidiates...
+Parse #6: Check orphaned mft...
+100.00 percent completed
+Clean, No errors found or left (errors:0, fixed:0)

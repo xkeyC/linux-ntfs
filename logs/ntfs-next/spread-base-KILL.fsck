@@ -1,0 +1,23 @@
+Parse #1: Scan mft entries in volume...
+Parse #2: Check system files...
+  5.88 percent completed 11.76 percent completed 17.65 percent completed 23.53 percent completed 29.41 percent completed 35.29 percent completed 41.18 percent completed 47.06 percent completed 52.94 percent completed 58.82 percent completed 64.71 percent completed 70.59 percent completed 76.47 percent completed 82.35 percent completed 88.24 percent completed100.00 percent completed
+100.00 percent completedParse #3: Replay logfile...
+Parse #4: Check index entries in volume...
+Failed to open inode(56)
+Inode(56:s13): Index entry is corrupted, Remove it from parent(5) Fix it? No
+Failed to open inode(58)
+Inode(58:s14): Index entry is corrupted, Remove it from parent(5) Fix it? No
+Failed to open inode(60)
+Inode(60:s15): Index entry is corrupted, Remove it from parent(5) Fix it? No
+Failed to open inode(62)
+Inode(62:s16): Index entry is corrupted, Remove it from parent(5) Fix it? No
+100.00 percent completed
+Parse #4 Errors remains: 4
+Parse #5: Scan orphaned MFTs candidiates... (left:4, errors:4, fixed:0)
+Parse #5 Errors remains: 4
+Parse #6: Check orphaned mft... (left:4, errors:4, fixed:0)
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+100.00 percent completed
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Parse #6 Errors remains: 5
+5 errors left (errors:5, fixed:0)

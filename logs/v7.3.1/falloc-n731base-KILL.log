@@ -1,0 +1,9 @@
+=== trial 1: fallocate interrupted
+=== RESULT module=n731base scen=falloc signal=KILL ro_after_trial=1
+      1 ntfs: (device vda): mft_bitmap_alloc_free_rec(): Failed to read mft bitmap, aborting.
+      1 ntfs: (device vda): Filesystem has been set read-only
+      1 Unknown kernel command line parameters "ntfsmod=n731base scen=falloc sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731base scen=falloc sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731base scen=falloc sig=KILL n=20
+      1     ntfsmod=n731base
+=== umount ok

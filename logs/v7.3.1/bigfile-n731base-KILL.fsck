@@ -1,0 +1,119 @@
+Parse #1: Scan mft entries in volume...
+Parse #2: Check system files...
+  5.88 percent completed 11.76 percent completed 17.65 percent completed 23.53 percent completed 29.41 percent completed 35.29 percent completed 41.18 percent completed 47.06 percent completed 52.94 percent completed 58.82 percent completed 64.71 percent completed 70.59 percent completed 76.47 percent completed 82.35 percent completed 88.24 percent completed100.00 percent completed
+100.00 percent completedParse #3: Replay logfile...
+Parse #4: Check index entries in volume...
+Link count of inode(32) is zero
+Failed to check inode(32) in parent(5) index.
+Inode(32:b2): Index entry is corrupted, Remove it from parent(5) Fix it? No
+100.00 percent completed
+Parse #4 Errors remains: 1
+Parse #5: Scan orphaned MFTs candidiates... (left:1, errors:1, fixed:0)
+Failed to find filename of inode(32)
+Inode(32) check failed. Delete orphaned NFT candidiates Fix it? No
+100.00 percent completed
+Clear MFT bitmap count:1
+Parse #5 Errors remains: 1
+Parse #6: Check orphaned mft... (left:1, errors:1, fixed:0)
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(0:b0): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Found an orphaned file(33), try to add index entry Fix it? No
+Found an orphaned file(34), try to add index entry Fix it? No
+Found an orphaned file(35), try to add index entry Fix it? No
+Found an orphaned file(36), try to add index entry Fix it? No
+Found an orphaned file(37), try to add index entry Fix it? No
+Found an orphaned file(38), try to add index entry Fix it? No
+Found an orphaned file(39), try to add index entry Fix it? No
+Found an orphaned file(50), try to add index entry Fix it? No
+Found an orphaned file(51), try to add index entry Fix it? No
+Found an orphaned file(52), try to add index entry Fix it? No
+Found an orphaned file(53), try to add index entry Fix it? No
+Found an orphaned file(54), try to add index entry Fix it? No
+Found an orphaned file(55), try to add index entry Fix it? No
+Found an orphaned file(56), try to add index entry Fix it? No
+Found an orphaned file(57), try to add index entry Fix it? No
+Found an orphaned file(58), try to add index entry Fix it? No
+Found an orphaned file(59), try to add index entry Fix it? No
+Found an orphaned file(60), try to add index entry Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(6:80): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Inode(0:b0): Cluster bitmap of fsck and disk are different. Apply to disk Fix it? No
+Parse #6 Errors remains: 60
+60 errors left (errors:60, fixed:0)

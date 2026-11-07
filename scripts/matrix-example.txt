@@ -1,0 +1,18 @@
+# NTFSMOD SCENARIO SIGNAL
+base spread KILL
+fix  spread KILL
+fix  spread TERM
+base bigfile KILL
+fix  bigfile KILL
+base dir-rm KILL
+fix  dir-rm KILL
+fix  dir-rm TERM
+base lookup KILL
+fix  lookup KILL
+fix  lookup TERM
+fix  dir-create KILL
+base falloc KILL
+fix  falloc KILL
+base write KILL
+fix  write KILL
+fix  eio KILL

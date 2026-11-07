@@ -1,0 +1,26 @@
+=== trial 1: lookup interrupted
+=== trial 2: lookup interrupted
+=== trial 3: lookup interrupted
+=== trial 4: lookup interrupted
+=== trial 5: lookup interrupted
+=== trial 6: lookup interrupted
+=== trial 7: lookup interrupted
+=== trial 8: lookup interrupted
+=== trial 9: lookup interrupted
+=== trial 10: lookup interrupted
+=== trial 11: lookup interrupted
+=== trial 12: lookup interrupted
+=== trial 13: lookup interrupted
+=== trial 14: lookup interrupted
+=== trial 15: lookup interrupted
+=== trial 16: lookup interrupted
+=== trial 17: lookup interrupted
+=== trial 18: lookup interrupted
+=== trial 19: lookup interrupted
+=== trial 20: lookup interrupted
+=== RESULT module=n731v3 scen=lookup signal=KILL ro_after_trial=none
+      1 Unknown kernel command line parameters "ntfsmod=n731v3 scen=lookup sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731v3 scen=lookup sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731v3 scen=lookup sig=KILL n=20
+      1     ntfsmod=n731v3
+=== umount ok

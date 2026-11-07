@@ -1,0 +1,26 @@
+=== trial 1: b1 removed
+=== trial 2: b2 removed
+=== trial 3: b3 removed
+=== trial 4: b4 removed
+=== trial 5: b5 removed
+=== trial 6: b6 removed
+=== trial 7: b7 removed
+=== trial 8: b8 removed
+=== trial 9: b9 removed
+=== trial 10: b10 removed
+=== trial 11: b11 removed
+=== trial 12: b12 removed
+=== trial 13: b13 removed
+=== trial 14: b14 removed
+=== trial 15: b15 removed
+=== trial 16: b16 removed
+=== trial 17: b17 removed
+=== trial 18: b18 removed
+=== trial 19: b19 removed
+=== trial 20: b20 removed
+=== RESULT module=n731v3 scen=bigfile signal=KILL ro_after_trial=none
+      1 Unknown kernel command line parameters "ntfsmod=n731v3 scen=bigfile sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731v3 scen=bigfile sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731v3 scen=bigfile sig=KILL n=20
+      1     ntfsmod=n731v3
+=== umount ok

@@ -1,0 +1,12 @@
+=== trial 1: dir has 4000
+=== trial 2: dir has 3999
+=== RESULT module=n731base scen=dir-rm signal=KILL ro_after_trial=2
+      1 ntfs: (device vda): ntfs_mft_record_free(): Eeek! Rollback failed in ntfs_mft_record_free. Leaving inconsistent metadata!
+      1 ntfs: (device vda): ntfs_delete_base_inode(): Failed to free base MFT record. Leaving inconsistent metadata.
+      1 ntfs: (device vda): __ntfs_bitmap_set_bits_in_run(): Failed to map first page (error -4), aborting.
+      1 ntfs: (device vda): Filesystem has been set read-only
+      1 Unknown kernel command line parameters "ntfsmod=n731base scen=dir-rm sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731base scen=dir-rm sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=n731base scen=dir-rm sig=KILL n=20
+      1     ntfsmod=n731base
+=== umount ok

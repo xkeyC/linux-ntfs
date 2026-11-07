@@ -1,0 +1,10 @@
+=== trial 1: dir has 4000
+=== RESULT module=base scen=dir-rm signal=KILL ro_after_trial=1
+      1 ntfs: (device vda): ntfs_lookup_inode_by_name(): Failed to map directory index page, error 4.
+      1 ntfs: (device vda): ntfs_lookup(): ntfs_lookup_ino_by_name() failed with error code 4.
+      1 ntfs: (device vda): Filesystem has been set read-only
+      1 Unknown kernel command line parameters "ntfsmod=base scen=dir-rm sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=dir-rm sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=dir-rm sig=KILL n=20
+      1     ntfsmod=base
+=== umount ok
