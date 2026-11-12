@@ -1,0 +1,15 @@
+=== trial 1: 12 -> 0
+=== trial 2: 12 -> 10
+=== RESULT module=v2 scen=eio signal=KILL ro_after_trial=2
+      2 ntfs: (device dm-0): ntfs_mft_end_io(): I/O error while writing MFT: -5
+      1 ntfs: (device dm-0): write_mft_record_nolock(): I/O error while writing mft record 0x3a!  Marking base inode as bad.  You should unmount the volume and run chkdsk.
+      1 ntfs: (device dm-0): ntfs_non_resident_dealloc_clusters(): Failed to free attribute clusters. Leaving inconsistent metadata.
+      1 ntfs: (device dm-0): ntfs_mft_record_free(): Eeek! Rollback failed in ntfs_mft_record_free. Leaving inconsistent metadata!
+      1 ntfs: (device dm-0): ntfs_delete_base_inode(): Failed to free base MFT record. Leaving inconsistent metadata.
+      1 ntfs: (device dm-0): __ntfs_bitmap_set_bits_in_run(): Failed to map first page (error -5), aborting.
+      1 ntfs: (device dm-0): Filesystem has been set read-only
+      1 Unknown kernel command line parameters "ntfsmod=v2 scen=eio sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=v2 scen=eio sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=v2 scen=eio sig=KILL n=20
+      1     ntfsmod=v2
+=== umount ok

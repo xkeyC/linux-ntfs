@@ -7,6 +7,9 @@
 set -eu
 [ $# -eq 7 ] || { sed -n '3,6p' "$0"; exit 1; }
 kernel=$1 initrd=$2 image=$3
+for f in "$kernel" "$initrd" "$image"; do
+	[ -f "$f" ] || { echo "=== MISSING FILE $f"; exit 1; }
+done
 th=",throttling.iops-read=40"
 [ "${THROTTLE:-1}" = 0 ] && th=
 timeout "${TIMEOUT:-1800}" qemu-system-x86_64 -enable-kvm -cpu host -m 3072 -smp 4 \

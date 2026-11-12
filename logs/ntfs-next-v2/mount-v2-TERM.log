@@ -1,0 +1,27 @@
+=== trial 1: mounted rw
+=== trial 2: mounted rw
+=== trial 3: mounted rw
+=== trial 4: mounted rw
+=== trial 5: mounted rw
+=== trial 6: mounted rw
+=== trial 7: mounted rw
+=== trial 8: mounted rw
+=== trial 9: mounted rw
+=== trial 10: mounted rw
+=== trial 11: mounted rw
+=== trial 12: mounted rw
+=== trial 13: mounted rw
+=== trial 14: mounted rw
+=== trial 15: mounted rw
+=== trial 16: mounted rw
+=== trial 17: mounted rw
+=== trial 18: mounted rw
+=== trial 19: mounted rw
+=== trial 20: mounted rw
+=== RESULT module=v2 scen=mount signal=TERM ro_after_trial=none
+     20 ntfs: Entering ntfs_put_super, dev vda
+      1 Unknown kernel command line parameters "ntfsmod=v2 scen=mount sig=TERM n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=v2 scen=mount sig=TERM n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=v2 scen=mount sig=TERM n=20
+      1     ntfsmod=v2
+=== umount ok

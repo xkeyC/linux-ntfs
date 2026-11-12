@@ -35,12 +35,14 @@ images**: the unpatched driver damages the volume.
   patch, e.g. `make -C <tree> O=build M=<copy of fs/ntfs> modules`.
 - A static busybox, `mkntfs` and `ntfsck` (ntfsprogs-plus).
 - `dmsetup`, only for the `eio` scenario.
+- `tools/ntfs-stream`, only for the `stream` scenario: a static build of
+  `tools/ntfs-stream.c`, e.g. `gcc -static -O2 -o ntfs-stream tools/ntfs-stream.c`.
 
 ## Usage
 
     scripts/mkinitramfs.sh -o initrd.gz -b /path/to/busybox \
         -m base=/path/to/unpatched/ntfs.ko -m fix=/path/to/patched/ntfs.ko \
-        [-d /path/to/dmsetup] [-e dir-with-virtio-modules]
+        [-d /path/to/dmsetup] [-e dir-with-virtio-modules] [-x ntfs-stream]
     scripts/mkimages.sh bzImage initrd.gz fix img/
     scripts/matrix.sh bzImage initrd.gz img/ out/ scripts/matrix-example.txt 4
 
@@ -55,8 +57,10 @@ Each run prints one line:
     spread-base-KILL: ro_after_trial=2 | ntfsck: 5 errors left (errors:5, fixed:0)
 
 `ro_after_trial=N` means the volume went read-only in run N; `none` means
-it stayed read-write for all runs. The `.log` file has the kernel messages,
-and the `.fsck` file has the ntfsck output.
+it stayed read-write for all runs. For `mount`, the `=== trial` lines in the
+log say whether each killed mount failed or mounted read-write or read-only.
+The `.log` file has the kernel messages, and the `.fsck` file has the
+ntfsck output.
 
 ## Scenarios (scripts/guest-init)
 
@@ -69,15 +73,17 @@ and the `.fsck` file has the ntfsck output.
 | `dir-create` | creating files between the existing names | index insert (not reached, see below) |
 | `falloc` | `fallocate -l 6G` | cluster and MFT record allocation |
 | `write` | `dd bs=1M count=400 conv=fsync` | cluster allocation during writeback |
+| `stream` | rewriting 100 bytes in each page of an 8 MiB named stream through `NTFS_IOC_STREAM_WRITE` | read-modify-write of a non-resident named stream |
+| `mount` | `mount` | the mount-time reads of `$MFT`, `$MFTMirr`, `$LogFile`, `$AttrDef`, `$UpCase`, `$BadClus` |
 | `eio` | `rm` as in `spread`, while reads are delayed by dm-delay and then failed with `fail_make_request` | a read that is interrupted and then fails |
 
 ## Results in logs/
 
 Twenty runs per scenario, SIGKILL unless the name says TERM.
 
-`logs/ntfs-next/`: the kernel is linkinjeon/ntfs.git `ntfs-next` at
-2b4bb6d6d with `kernel/vm.config`. `base` is the unpatched driver and `v3`
-is the patched one.
+`logs/ntfs-next/` (patch v1): the kernel is linkinjeon/ntfs.git `ntfs-next`
+at 2b4bb6d6d with `kernel/vm.config`. `base` is the unpatched driver and
+`v3` is the driver with patch v1.
 
 | scenario | base | v3 |
 |---|---|---|
@@ -91,6 +97,18 @@ is the patched one.
 | eio | — | read-only from the real I/O error, `error -5` instead of -4, task exits |
 
 There were no KASAN, lockdep or hung task reports in any run.
+
+`logs/ntfs-next-v2/` (patch v2): the same kernel. `base` is the unpatched
+driver, `v1` and `v2` are the driver with patch v1 and v2.
+
+| scenario | base | v1 | v2 |
+|---|---|---|---|
+| stream | read-only in run 1 (`__ntfs_inode_non_resident_attr_pwrite(): Failed to read a page 6 for attr 0x80: -4`) | clean | clean (KILL and TERM) |
+| mount | the killed mount failed in all 20 runs, with bogus `$UpCase` and `$AttrDef` errors | — | mounted read-write in all 20 runs (KILL and TERM) |
+| spread, bigfile, dir-rm, lookup, falloc, write | see above | see above | clean |
+| eio | — | — | read-only from the real I/O error, `error -5`, task exits |
+
+Again no KASAN, lockdep or hung task reports.
 
 `logs/v7.3.1/`: the NixOS v7.3.1 kernel. `n731base` is v7.3.1 plus the
 ntfs fixes queued for 7.3.y and a local workaround for the lookup case.

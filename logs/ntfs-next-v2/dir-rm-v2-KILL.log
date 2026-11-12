@@ -1,0 +1,26 @@
+=== trial 1: dir has 4000
+=== trial 2: dir has 3998
+=== trial 3: dir has 3995
+=== trial 4: dir has 3991
+=== trial 5: dir has 3987
+=== trial 6: dir has 3982
+=== trial 7: dir has 3976
+=== trial 8: dir has 3970
+=== trial 9: dir has 3963
+=== trial 10: dir has 3956
+=== trial 11: dir has 3949
+=== trial 12: dir has 3940
+=== trial 13: dir has 3931
+=== trial 14: dir has 3921
+=== trial 15: dir has 3910
+=== trial 16: dir has 3899
+=== trial 17: dir has 3897
+=== trial 18: dir has 3895
+=== trial 19: dir has 3892
+=== trial 20: dir has 3888
+=== RESULT module=v2 scen=dir-rm signal=KILL ro_after_trial=none
+      1 Unknown kernel command line parameters "ntfsmod=v2 scen=dir-rm sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=v2 scen=dir-rm sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=v2 scen=dir-rm sig=KILL n=20
+      1     ntfsmod=v2
+=== umount ok

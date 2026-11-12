@@ -1,0 +1,33 @@
+=== trial 1: not mounted
+=== trial 2: not mounted
+=== trial 3: not mounted
+=== trial 4: not mounted
+=== trial 5: not mounted
+=== trial 6: not mounted
+=== trial 7: not mounted
+=== trial 8: not mounted
+=== trial 9: not mounted
+=== trial 10: not mounted
+=== trial 11: not mounted
+=== trial 12: not mounted
+=== trial 13: not mounted
+=== trial 14: not mounted
+=== trial 15: not mounted
+=== trial 16: not mounted
+=== trial 17: not mounted
+=== trial 18: not mounted
+=== trial 19: not mounted
+=== trial 20: not mounted
+=== RESULT module=base scen=mount signal=KILL ro_after_trial=none
+     20 ntfs: Entering ntfs_put_super, dev vda
+     20 ntfs: (device vda): Filesystem has been set read-only
+     18 ntfs: (device vda): ntfs_fill_super(): Failed to load system files (-22).
+     18 ntfs: (device vda): load_and_init_upcase(): Failed to load $UpCase from the volume. Using default.
+     18 ntfs: (device vda): load_and_init_attrdef(): Failed to initialize attribute definition table.
+      2 ntfs: (device vda): ntfs_read_inode_mount(): ntfs_read_inode() of $MFT failed.
+      1 ntfs: (device vda): check_mft_mirror(): Failed to read $MFTMirr.
+      1 Unknown kernel command line parameters "ntfsmod=base scen=mount sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=mount sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=mount sig=KILL n=20
+      1     ntfsmod=base
+=== umount ok

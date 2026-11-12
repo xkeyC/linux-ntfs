@@ -1,0 +1,9 @@
+=== trial 1: stream write interrupted
+=== RESULT module=base scen=stream signal=KILL ro_after_trial=1
+      1 ntfs: (device vda): __ntfs_inode_non_resident_attr_pwrite(): Failed to read a page 6 for attr 0x80: -4
+      1 ntfs: (device vda): Filesystem has been set read-only
+      1 Unknown kernel command line parameters "ntfsmod=base scen=stream sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=stream sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=base scen=stream sig=KILL n=20
+      1     ntfsmod=base
+=== umount ok

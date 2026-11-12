@@ -16,3 +16,7 @@ fix  falloc KILL
 base write KILL
 fix  write KILL
 fix  eio KILL
+base stream KILL
+fix  stream KILL
+base mount KILL
+fix  mount KILL

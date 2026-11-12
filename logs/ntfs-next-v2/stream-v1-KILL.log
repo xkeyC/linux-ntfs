@@ -1,0 +1,27 @@
+=== trial 1: stream write interrupted
+=== trial 2: stream write interrupted
+=== trial 3: stream write interrupted
+=== trial 4: stream write interrupted
+=== trial 5: stream write interrupted
+=== trial 6: stream write interrupted
+=== trial 7: stream write interrupted
+=== trial 8: stream write interrupted
+=== trial 9: stream write interrupted
+=== trial 10: stream write interrupted
+=== trial 11: stream write interrupted
+=== trial 12: stream write interrupted
+=== trial 13: stream write interrupted
+=== trial 14: stream write interrupted
+=== trial 15: stream write interrupted
+=== trial 16: stream write interrupted
+=== trial 17: stream write interrupted
+=== trial 18: stream write interrupted
+=== trial 19: stream write interrupted
+=== trial 20: stream write interrupted
+=== RESULT module=v1 scen=stream signal=KILL ro_after_trial=none
+      1 ntfs-stream (86) used greatest stack depth: 26248 bytes left
+      1 Unknown kernel command line parameters "ntfsmod=v1 scen=stream sig=KILL n=20", will be passed to user space.
+      1 Kernel command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=v1 scen=stream sig=KILL n=20
+      1 Command line: console=ttyS0 rdinit=/init panic=-1 loglevel=4 ntfsmod=v1 scen=stream sig=KILL n=20
+      1     ntfsmod=v1
+=== umount ok

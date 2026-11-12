@@ -4,7 +4,7 @@
 #
 # usage: mkinitramfs.sh -o initrd.gz -b /path/to/static/busybox \
 #            -m NAME=/path/to/ntfs.ko [-m NAME2=/path/to/other/ntfs.ko ...] \
-#            [-d /path/to/dmsetup] [-e /dir/with/extra/modules]
+#            [-d /path/to/dmsetup] [-e /dir/with/extra/modules] [-x /path/to/static/tool]
 #
 #  -m  ntfs modules to test; the guest loads /lib/ntfs-NAME.ko for ntfsmod=NAME
 #  -d  dmsetup binary, only needed for the eio scenario; its shared libraries
@@ -12,20 +12,24 @@
 #  -e  directory with modules the kernel needs before ntfs (e.g. virtio_ring,
 #      virtio, virtio_pci, virtio_blk on a distro kernel) plus a file "order"
 #      that lists their names, one per line, in load order
+#  -x  extra static program to put in /bin, e.g. tools/ntfs-stream for the
+#      stream scenario (repeatable)
 set -eu
 out='' busybox='' dmsetup='' extra=''
 mods=
-while getopts o:b:m:d:e: opt; do
+tools=
+while getopts o:b:m:d:e:x: opt; do
 	case $opt in
 	o) out=$OPTARG ;;
 	b) busybox=$OPTARG ;;
 	m) mods="$mods $OPTARG" ;;
 	d) dmsetup=$OPTARG ;;
 	e) extra=$OPTARG ;;
-	*) sed -n '3,14p' "$0"; exit 1 ;;
+	x) tools="$tools $OPTARG" ;;
+	*) sed -n '3,16p' "$0"; exit 1 ;;
 	esac
 done
-[ -n "$out" ] && [ -n "$busybox" ] && [ -n "$mods" ] || { sed -n '3,14p' "$0"; exit 1; }
+[ -n "$out" ] && [ -n "$busybox" ] && [ -n "$mods" ] || { sed -n '3,16p' "$0"; exit 1; }
 
 here=$(cd "$(dirname "$0")" && pwd)
 root=$(mktemp -d)
@@ -37,6 +41,9 @@ cp "$here/guest-init" "$root/init"
 chmod +x "$root/init"
 for m in $mods; do
 	cp "${m#*=}" "$root/lib/ntfs-${m%%=*}.ko"
+done
+for t in $tools; do
+	cp "$t" "$root/bin/"
 done
 if [ -n "$extra" ]; then
 	mkdir -p "$root/lib/extra"

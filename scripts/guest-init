@@ -94,6 +94,18 @@ for t in $(seq 1 $N); do
     ls -l /mnt/d > /dev/null & pid=$!
     usleep $(delay_us 50000 $t 600000); kill_and_check $pid
     echo "=== trial $t: lookup interrupted" ;;
+  stream)     # rewrite 100 bytes in each page of an 8 MiB named stream (each write reads its page)
+    if [ ! -e /mnt/sf ]; then ntfs-stream fill /mnt/sf s 2048 || echo "=== STREAM FILL FAILED"; sync; fi
+    fresh
+    ntfs-stream poke /mnt/sf s 2048 2>/dev/null & pid=$!
+    usleep $(delay_us 30000 $t 300000); kill_and_check $pid
+    echo "=== trial $t: stream write interrupted" ;;
+  mount)      # kill mount(8) while the driver reads $MFTMirr, $LogFile, $AttrDef, $UpCase, $BadClus...
+    umount /mnt; fresh
+    mount -t ntfs -o errors=remount-ro $DEV /mnt & pid=$!
+    usleep $(delay_us 20000 $t 400000); kill_and_check $pid
+    if grep -q ' /mnt ntfs ' /proc/mounts; then echo "=== trial $t: mounted $(grep ' /mnt ntfs ' /proc/mounts | cut -d' ' -f4 | cut -d, -f1)"
+    else echo "=== trial $t: not mounted"; mount -t ntfs -o errors=remount-ro $DEV /mnt || { echo "=== REMOUNT FAILED"; break; }; fi ;;
   falloc)
     fresh
     fallocate -l 6G /mnt/a$t & pid=$!

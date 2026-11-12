@@ -13,7 +13,7 @@ case $scen in
 spread|eio) tpl=spread ;;
 bigfile) tpl=bigfile ;;
 dir-rm|dir-create|lookup) tpl=dir ;;
-falloc|write) tpl=empty ;;
+falloc|write|stream|mount) tpl=empty ;;
 *) echo "unknown scenario $scen"; exit 1 ;;
 esac
 mkdir -p "$out"
@@ -25,4 +25,4 @@ th=1
 THROTTLE=$th "$here/qemu.sh" "$kernel" "$initrd" "$img" "$mod" "$scen" "$sig" "$runs" > "$out/$id.log" 2>&1 || true
 ntfsck -n "$img" 2>&1 | sed "s|$img|IMAGE|g" > "$out/$id.fsck" || true
 rm -f "$img"
-echo "$id: $(grep -a 'RESULT\|INSMOD FAILED\|MOUNT FAILED\|DMSETUP FAILED' "$out/$id.log" | sed 's/.*ro_after/ro_after/') | ntfsck: $(tail -1 "$out/$id.fsck")"
+echo "$id: $(grep -a 'RESULT\|INSMOD FAILED\|MOUNT FAILED\|DMSETUP FAILED\|MISSING FILE' "$out/$id.log" | sed 's/.*ro_after/ro_after/') | ntfsck: $(tail -1 "$out/$id.fsck")"
